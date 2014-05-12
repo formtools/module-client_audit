@@ -1,15 +1,9 @@
 {include file='modules_header.tpl'}
 
-  <table cellpadding="0" cellspacing="0">
+  <table cellpadding="0" cellspacing="0" class="margin_bottom_large">
   <tr>
-    <td width="45"><a href="index.php"><img src="images/icon_client_audit.gif" border="0" width="34" height="34" /></a></td>
-    <td class="title">
-      <a href="../../admin/modules">{$LANG.word_modules}</a>
-      <span class="joiner">&raquo;</span>
-      <a href="./">{$L.module_name}</a>
-      <span class="joiner">&raquo;</span>
-      {$L.word_changes}
-    </td>
+    <td width="45"><img src="images/icon_client_audit.gif" width="34" height="34" /></td>
+    <td class="title"><a href="./">{$L.module_name|upper}</a> &raquo; {$L.word_changes|upper}</td>
   </tr>
   </table>
 
@@ -162,10 +156,6 @@
     <tr{if "theme"|in_array:$changes} class="changed"{/if}>
       <td width="180" class="pad_left">{$LANG.word_theme}</td>
       <td class="pad_left">{$change_info.account_info.theme}</td>
-    </tr>
-    <tr{if "swatch"|in_array:$changes} class="changed"{/if}>
-      <td width="180" class="pad_left">{$L.word_swatch}</td>
-      <td class="pad_left">{$change_info.account_info.swatch}</td>
     </tr>
     <tr{if "menu_id"|in_array:$changes} class="changed"{/if}>
       <td width="180" class="pad_left">{$LANG.word_menu}</td>
