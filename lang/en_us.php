@@ -59,4 +59,4 @@ $L["text_permissions_desc"] = "Forms / Views highlighted in red indicate that th
 
 $L["confirm_delete_rows"] = "Are you sure you want to delete these rows?";
 
-
+$L["validation_no_rows_selected"] = "Please select one or more rows to delete.";

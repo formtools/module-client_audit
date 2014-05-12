@@ -2,8 +2,12 @@
 
   <table cellpadding="0" cellspacing="0">
   <tr>
-    <td width="45"><img src="images/icon_client_audit.gif" width="34" height="34" /></td>
-    <td class="title">{$L.module_name|upper}</td>
+    <td width="45"><a href="index.php"><img src="images/icon_client_audit.gif" border="0" width="34" height="34" /></a></td>
+    <td class="title">
+      <a href="../../admin/modules">{$LANG.word_modules}</a>
+      <span class="joiner">&raquo;</span>
+      {$L.module_name}
+    </td>
   </tr>
   </table>
 
@@ -105,46 +109,14 @@
                 <table cellspacing="0" cellpadding="0">
                 <tr>
                   <td class="pad_right">{$LANG.word_from_c}</td>
-                  <td>
-                    <table cellspacing="0" cellpadding="0" border="0">
-                      <tr>
-                        <td><input type="text" name="date_from" id="date_from" style="width: 80px;" value="{$search_criteria.date_from|escape}" {if $search_criteria.date_range == "all"}disabled{/if} /></td>
-                        <td width="30" class="pad_left">
-                          <img src="{$images_url}/calendar_icon.gif" id="from_calendar" border="0" {if $search_criteria.date_range == "all"}style="display:none"{/if} />
-                        </td>
-                      </tr>
-                    </table>
-                    <script type="text/javascript">
-                    {literal}Calendar.setup({{/literal}
-                       inputField     :    "date_from",
-                       showsTime      :    false,
-                       ifFormat       :    "%Y-%m-%d",
-                       button         :    "from_calendar",
-                       align          :    "Bl",
-                       singleClick    :    true
-                    {literal}});{/literal}
-                    </script>
+                  <td class="pad_right">
+                    <input type="text" name="date_from" id="date_from" class="datepicker" style="width: 80px;"
+                      value="{$search_criteria.date_from|escape}" {if $search_criteria.date_range == "all"}disabled{/if} />
                   </td>
                   <td class="pad_right">{$L.word_to_c}</td>
                   <td>
-                    <table cellspacing="0" cellpadding="0" border="0">
-                      <tr>
-                        <td><input type="text" name="date_to" id="date_to" style="width: 80px;" value="{$search_criteria.date_to|escape}" {if $search_criteria.date_range == "all"}disabled{/if} /></td>
-                        <td width="30" class="pad_left">
-                          <img src="{$images_url}/calendar_icon.gif" id="to_calendar" border="0" {if $search_criteria.date_range == "all"}style="display:none"{/if} />
-                        </td>
-                      </tr>
-                    </table>
-                    <script type="text/javascript">
-                    {literal}Calendar.setup({{/literal}
-                       inputField     :    "date_to",
-                       showsTime      :    false,
-                       ifFormat       :    "%Y-%m-%d",
-                       button         :    "to_calendar",
-                       align          :    "Bl",
-                       singleClick    :    true
-                    {literal}});{/literal}
-                    </script>
+                    <input type="text" name="date_to" id="date_to" class="datepicker" style="width: 80px;"
+                      value="{$search_criteria.date_to|escape}" {if $search_criteria.date_range == "all"}disabled{/if} />
                   </td>
                 </tr>
                 </table>
@@ -157,11 +129,11 @@
         <tr>
           <td colspan="3" align="right">
             <input type="submit" name="search_forms" value="{$LANG.word_search}" />
-            <input type="button" name="reset" value="{$LANG.phrase_show_all}" onclick="window.location='{$same_page}?reset=1'"
+            <input type="button" name="reset" onclick="window.location='{$same_page}?reset=1'"
               {if $num_search_results < $total_count}
-                class="bold"
+                value="{$LANG.phrase_show_all} ({$total_count})" class="bold"
               {else}
-                class="light_grey" disabled
+                value="{$LANG.phrase_show_all}" class="light_grey" disabled
               {/if} />
           </td>
         </tr>
@@ -230,8 +202,8 @@
         </table>
 
         <p>
-          <input type="submit" name="delete_all" id="delete_all" value="{$L.phrase_delete_all_results}" style="float: right"/>
-          <input type="submit" value="{$L.phrase_delete_selected_rows}" />
+          <input type="button" class="delete_all" name="delete_all" id="delete_all" value="{$L.phrase_delete_all_results}" style="float: right"/>
+          <input type="button" class="delete_selected" value="{$L.phrase_delete_selected_rows}" />
         </p>
 
       </form>

@@ -4,7 +4,9 @@ require_once("../../global/library.php");
 ft_init_module_page();
 $request = array_merge($_POST, $_GET);
 
-$change_info = ca_get_change($request["change_id"]);
+$change_id = $request["change_id"];
+
+$change_info = ca_get_change($change_id);
 $changes     = explode(",", $change_info["account_info"]["changed_fields"]);
 
 $permissions = "";
@@ -19,7 +21,7 @@ if ($change_info["change_type"] == "permissions")
 
   $form_ids = array_keys($permissions);
   foreach ($form_ids as $form_id)
-  	$all_form_views[$form_id] = ft_get_form_views($form_id);
+    $all_form_views[$form_id] = ft_get_form_views($form_id);
 
   if (!empty($change_info["permissions"]["added_forms"]))
     $added_forms   = explode(",", $change_info["permissions"]["added_forms"]);
@@ -64,30 +66,19 @@ $search_criteria = array(
 
 $nav_info = ca_get_details_page_nav_links($change_id, $search_criteria);
 
-// a bit sucky. Since this module tracks accounts that may have been deleted, we can't rely on pulling the
-// name from the database. So - for each user in this result set, check to see if they exist or not and
-// add an appropriate key for use by the template. This should be cached, but for v1 I'll leave it be
-$search_results = array();
-foreach ($search_query["results"] as $row)
-{
-  $row["account_exists"] = ft_account_exists($row["account_id"]);
-  $search_results[] = $row;
-}
-
 $settings_labels = array(
   "company_name" => $LANG["phrase_company_name"],
   "footer_text"  => $LANG["phrase_footer_text"],
   "max_failed_login_attempts" => $LANG["phrase_auto_disable_account"],
-	"min_password_length" => $LANG["phrase_min_password_length"],
-	"num_password_history" => $LANG["phrase_prevent_password_reuse"],
-	"required_password_chars" => $LANG["phrase_required_password_chars"],
+  "min_password_length" => $LANG["phrase_min_password_length"],
+  "num_password_history" => $LANG["phrase_prevent_password_reuse"],
+  "required_password_chars" => $LANG["phrase_required_password_chars"],
   "page_titles" => $LANG["phrase_page_titles"]
 );
 
 // ------------------------------------------------------------------------------------------------
 
 $page_vars = array();
-$page_vars["search"] = $search;
 $page_vars["search_criteria"]  = $search_criteria;
 $page_vars["change_info"]      = $change_info;
 $page_vars["changes"]          = $changes;
