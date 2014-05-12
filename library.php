@@ -28,7 +28,7 @@ function client_audit__install($module_id)
       username varchar(50) default NULL,
       `password` varchar(50) default NULL,
       PRIMARY KEY  (change_id)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+    ) TYPE=MyISAM DEFAULT CHARSET=utf8
       ";
 
   $queries[] = "
@@ -37,7 +37,7 @@ function client_audit__install($module_id)
       setting_name varchar(255) NOT NULL,
       setting_value mediumtext NOT NULL,
       PRIMARY KEY  (change_id,setting_name)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+    ) TYPE=MyISAM DEFAULT CHARSET=utf8
       ";
 
   $queries[] = "
@@ -48,7 +48,7 @@ function client_audit__install($module_id)
       `status` enum('hidden','visible') NOT NULL default 'visible',
       account_id mediumint(9) NOT NULL,
       PRIMARY KEY (change_id)
-    ) ENGINE=InnoDB  DEFAULT CHARSET=utf8
+    ) TYPE=MyISAM  DEFAULT CHARSET=utf8
       ";
 
   $queries[] = "
@@ -60,7 +60,7 @@ function client_audit__install($module_id)
     removed_forms mediumtext,
     permissions mediumtext NOT NULL,
     PRIMARY KEY (change_id)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+  ) TYPE=MyISAM DEFAULT CHARSET=utf8
       ";
 
   $has_problem = false;
@@ -131,6 +131,23 @@ function client_audit__uninstall($module_id)
   @mysql_query("DROP TABLE {$g_table_prefix}module_client_audit_client_permissions");
 
   return array(true, "");
+}
+
+
+function client_audit__upgrade($old_version, $new_version)
+{
+	global $g_table_prefix;
+
+  $old_version_info = ft_get_version_info($old_version);
+  $new_version_info = ft_get_version_info($new_version);
+
+  if ($old_version_info["release_date"] < 20090908)
+  {
+  	@mysql_query("ALTER TABLE {$g_table_prefix}module_client_audit_accounts TYPE=MyISAM");
+  	@mysql_query("ALTER TABLE {$g_table_prefix}module_client_audit_account_settings TYPE=MyISAM");
+  	@mysql_query("ALTER TABLE {$g_table_prefix}module_client_audit_changes TYPE=MyISAM");
+  	@mysql_query("ALTER TABLE {$g_table_prefix}module_client_audit_client_permissions TYPE=MyISAM");
+  }
 }
 
 
