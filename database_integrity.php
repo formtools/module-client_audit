@@ -74,6 +74,13 @@ $STRUCTURE["tables"]["module_client_audit_accounts"] = array(
     "Default" => "default"
   ),
   array(
+    "Field"   => "swatch",
+    "Type"    => "varchar(255)",
+    "Null"    => "NO",
+    "Key"     => "",
+    "Default" => ""
+  ),
+  array(
     "Field"   => "menu_id",
     "Type"    => "mediumint(8) unsigned",
     "Null"    => "NO",
