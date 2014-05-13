@@ -227,3 +227,77 @@ $STRUCTURE["tables"]["module_client_audit_client_permissions"] = array(
     "Default" => ""
   )
 );
+
+$HOOKS = array();
+$HOOKS["1.1.7"] = array(
+  array(
+    "hook_type"       => "code",
+    "action_location" => "main",
+    "function_name"   => "ft_login",
+    "hook_function"   => "ca_log_change",
+    "priority"        => "50"
+  ),
+  array(
+    "hook_type"       => "code",
+    "action_location" => "main",
+    "function_name"   => "ft_logout_user",
+    "hook_function"   => "ca_log_change",
+    "priority"        => "50"
+  ),
+  array(
+    "hook_type"       => "code",
+    "action_location" => "end",
+    "function_name"   => "ft_add_client",
+    "hook_function"   => "ca_log_change",
+    "priority"        => "50"
+  ),
+  array(
+    "hook_type"       => "code",
+    "action_location" => "end",
+    "function_name"   => "ft_admin_update_client",
+    "hook_function"   => "ca_log_change",
+    "priority"        => "50"
+  ),
+  array(
+    "hook_type"       => "code",
+    "action_location" => "end",
+    "function_name"   => "ft_update_client",
+    "hook_function"   => "ca_log_change",
+    "priority"        => "50"
+  ),
+  array(
+    "hook_type"       => "code",
+    "action_location" => "end",
+    "function_name"   => "ft_disable_client",
+    "hook_function"   => "ca_log_change",
+    "priority"        => "50"
+  ),
+  array(
+    "hook_type"       => "code",
+    "action_location" => "end",
+    "function_name"   => "ft_delete_client",
+    "hook_function"   => "ca_log_change",
+    "priority"        => "50"
+  ),
+  array(
+    "hook_type"       => "code",
+    "action_location" => "end",
+    "function_name"   => "ft_update_view",
+    "hook_function"   => "ca_log_change",
+    "priority"        => "50"
+  ),
+  array(
+    "hook_type"       => "code",
+    "action_location" => "end",
+    "function_name"   => "ft_update_form_main_tab",
+    "hook_function"   => "ca_log_change",
+    "priority"        => "50"
+  ),
+  array(
+    "hook_type"       => "code",
+    "action_location" => "start",
+    "function_name"   => "ft_delete_form",
+    "hook_function"   => "ca_log_change",
+    "priority"        => "50"
+  )
+);
