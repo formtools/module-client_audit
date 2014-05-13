@@ -149,6 +149,7 @@
       {$pagination}
 
       <form action="{$same_page}" method="post" id="client_audit_form">
+        <input type="hidden" name="delete_all" id="delete_all" value="" />
 
         <table class="list_table" cellpadding="1" cellspacing="1" border="0" width="650">
         <tr>
@@ -202,7 +203,7 @@
         </table>
 
         <p>
-          <input type="button" class="delete_all" name="delete_all" id="delete_all" value="{$L.phrase_delete_all_results}" style="float: right"/>
+          <input type="button" id="delete_all_button" value="{$L.phrase_delete_all_results}" style="float: right"/>
           <input type="button" class="delete_selected" value="{$L.phrase_delete_selected_rows}" />
         </p>
 

@@ -7,7 +7,6 @@ $request = array_merge($_POST, $_GET);
 $all_change_types = array("login", "logout", "account_created", "account_deleted", "admin_update",
   "client_update", "account_disabled_from_failed_logins", "permissions");
 
-
 if (isset($_GET["reset"]))
 {
   $_POST["client_id"] = "";
@@ -93,7 +92,7 @@ $(function() {
     $(".change_row").each(function() { this.checked = is_checked; });
   });
 
-  $(".delete_all").bind("click", function() {
+  $("#delete_all_button").bind("click", function() {
     ft.create_dialog({
       title:   "{$LANG["phrase_please_confirm"]}",
       content: "{$L["confirm_delete_rows"]}",
@@ -101,6 +100,7 @@ $(function() {
       buttons: [{
         text:  "{$LANG["word_yes"]}",
         click: function() {
+          $("#delete_all").val("1");
           $("#client_audit_form").trigger("submit");
         }
       },

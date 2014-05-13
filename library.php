@@ -26,7 +26,7 @@ function client_audit__install($module_id)
       last_name varchar(100) default NULL,
       email varchar(200) default NULL,
       username varchar(50) default NULL,
-      `password` varchar(50) default NULL,
+      password varchar(50) default NULL,
       PRIMARY KEY  (change_id)
     ) DEFAULT CHARSET=utf8
       ";
@@ -45,7 +45,7 @@ function client_audit__install($module_id)
       change_id mediumint(8) unsigned NOT NULL auto_increment,
       change_date datetime NOT NULL,
       change_type enum('account_created','account_deleted','admin_update','client_update','account_disabled_from_failed_logins','permissions','login','logout') character set latin1 NOT NULL,
-      `status` enum('hidden','visible') NOT NULL default 'visible',
+      status enum('hidden','visible') NOT NULL default 'visible',
       account_id mediumint(9) NOT NULL,
       PRIMARY KEY (change_id)
     ) DEFAULT CHARSET=utf8
