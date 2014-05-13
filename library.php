@@ -520,8 +520,8 @@ function ca_search_history($search_criteria)
   if (!empty($search_criteria["date_from"]) && !empty($search_criteria["date_to"]))
     $where_clauses[] = "change_date >= '{$search_criteria["date_from"]} 00:00:00' AND change_date <= '{$search_criteria["date_to"]} 23:59:59'";
 
-  if (empty($search_criteria["page_num"]))
-    $page_num = 1;
+  $page_num = (empty($search_criteria["page"])) ? 1 : $search_criteria["page"];
+
   $first_item = ($page_num - 1) * $search_criteria["per_page"];
   $limit_clause = "LIMIT $first_item, {$search_criteria["per_page"]}";
 
