@@ -5,9 +5,11 @@ ft_init_module_page();
 $request = array_merge($_POST, $_GET);
 
 $change_id = $request["change_id"];
-
 $change_info = ca_get_change($change_id);
-$changes     = explode(",", $change_info["account_info"]["changed_fields"]);
+
+$changes = array();
+if (isset($change_info["account_info"]["changed_fields"]) && !empty($change_info["account_info"]["changed_fields"]))
+  $changes = explode(",", $change_info["account_info"]["changed_fields"]);
 
 $permissions = "";
 $added_forms   = array();
