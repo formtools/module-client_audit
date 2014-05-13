@@ -34,7 +34,7 @@ $search_criteria = array(
   "date_to"      => $date_to
 );
 
-if (isset($request["delete_all"]))
+if (isset($request["delete_all"]) && $request["delete_all"] == 1)
   list($g_success, $g_message) = ca_delete_all_in_current_search($search_criteria);
 else if (isset($request["change_ids"]))
   list($g_success, $g_message) = ca_delete_changes($request["change_ids"]);

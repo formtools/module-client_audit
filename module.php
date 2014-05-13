@@ -3,8 +3,8 @@
 $MODULE["author"]          = "Encore Web Studios";
 $MODULE["author_email"]    = "formtools@encorewebstudios.com";
 $MODULE["author_link"]     = "http://www.encorewebstudios.com";
-$MODULE["version"]         = "1.1.3";
-$MODULE["date"]            = "2011-09-19";
+$MODULE["version"]         = "1.1.4";
+$MODULE["date"]            = "2011-09-26";
 $MODULE["origin_language"] = "en_us";
 
 // define the module navigation - the keys are keys defined in the language file. This lets
