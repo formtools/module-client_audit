@@ -21,6 +21,7 @@ function client_audit__install($module_id)
       login_page varchar(50) NOT NULL default 'client_forms',
       logout_url varchar(255) default NULL,
       theme varchar(50) NOT NULL default 'default',
+      swatch varchar(255) NOT NULL,
       menu_id mediumint(8) unsigned NOT NULL,
       first_name varchar(100) default NULL,
       last_name varchar(100) default NULL,
@@ -148,12 +149,17 @@ function client_audit__upgrade($old_version, $new_version)
     @mysql_query("ALTER TABLE {$g_table_prefix}module_client_audit_changes TYPE=MyISAM");
     @mysql_query("ALTER TABLE {$g_table_prefix}module_client_audit_client_permissions TYPE=MyISAM");
   }
+
+  if ($old_version_info["release_date"] < 20111007)
+  {
+    mysql_query("ALTER TABLE {$g_table_prefix}module_client_audit_accounts ADD swatch VARCHAR(255) NOT NULL AFTER theme");
+  }
 }
 
 
 /**
  * Our one hook function to rule them all. This is executed for all registered code hooks for the
- * module: it
+ * module.
  *
  * @param $info
  */
@@ -302,7 +308,7 @@ function ca_update_account_changelog($account_id, $change_id, $last_account_info
   {
     // compare the current content of the user's account with the last state change and log the results
     $fields = array("account_status", "ui_language", "timezone_offset", "sessions_timeout", "date_format",
-      "login_page", "logout_url", "theme", "menu_id", "first_name", "last_name", "email", "username",
+      "login_page", "logout_url", "theme", "swatch", "menu_id", "first_name", "last_name", "email", "username",
       "password");
 
     foreach ($fields as $field)
@@ -328,14 +334,14 @@ function ca_update_account_changelog($account_id, $change_id, $last_account_info
   $query = mysql_query("
     INSERT INTO {$g_table_prefix}module_client_audit_accounts (change_id, changed_fields,
       account_status, ui_language, timezone_offset, sessions_timeout, date_format, login_page,
-      logout_url, theme, menu_id, first_name, last_name, email, username, password)
+      logout_url, theme, swatch, menu_id, first_name, last_name, email, username, password)
     VALUES ($change_id, '$changed_fields_str', '{$account_info["account_status"]}',
       '{$account_info["ui_language"]}', '{$account_info["timezone_offset"]}',
       '{$account_info["sessions_timeout"]}', '{$account_info["date_format"]}',
       '{$account_info["login_page"]}', '{$account_info["logout_url"]}',
-      '{$account_info["theme"]}', '{$account_info["menu_id"]}', '{$account_info["first_name"]}',
-      '{$account_info["last_name"]}', '{$account_info["email"]}', '{$account_info["username"]}',
-      '{$account_info["password"]}')
+      '{$account_info["theme"]}', '{$account_info["swatch"]}', '{$account_info["menu_id"]}',
+      '{$account_info["first_name"]}', '{$account_info["last_name"]}', '{$account_info["email"]}',
+      '{$account_info["username"]}', '{$account_info["password"]}')
       ");
 
   // if the main query was successful (it always SHOULD be) log the account settings. Note that we log ALL of them:
@@ -874,7 +880,7 @@ function ca_account_has_changed($account_id, $old_account_info)
   // the account_settings table
   $changed_fields = array();
   $fields = array("account_status", "ui_language", "timezone_offset", "sessions_timeout", "date_format",
-    "login_page", "logout_url", "theme", "menu_id", "first_name", "last_name", "email", "username",
+    "login_page", "logout_url", "theme", "swatch", "menu_id", "first_name", "last_name", "email", "username",
     "password");
 
   foreach ($fields as $field)

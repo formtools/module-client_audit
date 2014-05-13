@@ -163,6 +163,10 @@
       <td width="180" class="pad_left">{$LANG.word_theme}</td>
       <td class="pad_left">{$change_info.account_info.theme}</td>
     </tr>
+    <tr{if "swatch"|in_array:$changes} class="changed"{/if}>
+      <td width="180" class="pad_left">{$L.word_swatch}</td>
+      <td class="pad_left">{$change_info.account_info.swatch}</td>
+    </tr>
     <tr{if "menu_id"|in_array:$changes} class="changed"{/if}>
       <td width="180" class="pad_left">{$LANG.word_menu}</td>
       <td class="pad_left">{$change_info.account_info.menu_id}</td>

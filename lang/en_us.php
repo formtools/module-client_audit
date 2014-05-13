@@ -15,6 +15,7 @@ $L["word_to_c"] = "To:";
 $L["word_event"] = "Event";
 $L["word_details"] = "Details";
 $L["word_changes"] = "Changes";
+$L["word_swatch"] = "Swatch";
 
 $L["phrase_all_change_types"] = "All change types";
 $L["phrase_clear_logs"] = "Clear Logs";
