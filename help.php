@@ -1,11 +1,7 @@
 <?php
 
 require_once("../../global/library.php");
-ft_init_module_page();
-$request = array_merge($_POST, $_GET);
 
-// ------------------------------------------------------------------------------------------------
+$module = FormTools\Modules::initModulePage("admin");
 
-$page_vars = array();
-
-ft_display_module_page("templates/help.tpl", $page_vars);
+$module->displayPage("templates/help.tpl");

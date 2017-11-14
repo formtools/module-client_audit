@@ -1,21 +1,21 @@
-{include file='modules_header.tpl'}
+{ft_include file='modules_header.tpl'}
 
-  <table cellpadding="0" cellspacing="0">
-  <tr>
-    <td width="45"><a href="index.php"><img src="images/icon_client_audit.gif" border="0" width="34" height="34" /></a></td>
-    <td class="title">
-      <a href="../../admin/modules">{$LANG.word_modules}</a>
-      <span class="joiner">&raquo;</span>
-      {$L.module_name}
-    </td>
-  </tr>
-  </table>
+    <table cellpadding="0" cellspacing="0">
+    <tr>
+        <td width="45"><a href="index.php"><img src="images/icon_client_audit.gif" border="0" width="34" height="34" /></a></td>
+        <td class="title">
+            <a href="../../admin/modules">{$LANG.word_modules}</a>
+            <span class="joiner">&raquo;</span>
+            {$L.module_name}
+        </td>
+    </tr>
+    </table>
 
-  {include file='messages.tpl'}
+    {ft_include file='messages.tpl'}
 
-  {if $total_count == 0}
-    <div>{$L.notify_no_activity}</div>
-  {else}
+    {if $total_count == 0}
+        <div>{$L.notify_no_activity}</div>
+    {else}
 
     <form action="{$same_page}" method="post">
       <table cellspacing="1" cellpadding="0" id="search_table" class="margin_bottom" width="100%">
@@ -32,7 +32,11 @@
               {if $deleted_clients|@count > 0}
                 <optgroup label="{$L.phrase_deleted_clients}">
                 {foreach from=$deleted_clients item=client name=row}
-                  <option value="{$client.account_id}" {if $search_criteria.client_id == $client.account_id}selected{/if}>{$client.last_name}, {$client.first_name}</option>
+                  {if !empty($client.last_name) && !empty($client.first_name)}
+                    <option value="{$client.account_id|default:"unknown"}" {if $search_criteria.client_id == $client.account_id}selected{/if}>
+                      {$client.last_name}, {$client.first_name}
+                    </option>
+                  {/if}
                 {/foreach}
                 </optgroup>
               {/if}
@@ -143,7 +147,7 @@
     {if $num_search_results == 0}
       {assign var="g_message" value=$L.notify_no_results}
       {assign var="g_success" value=false}
-      {include file='messages.tpl'}
+      {ft_include file='messages.tpl'}
     {else}
 
       {$pagination}
@@ -163,7 +167,7 @@
           <tr>
             <td align="center"><input type="checkbox" name="change_ids[]" class="change_row" value="{$row.change_id}" /></td>
             <td>
-              {$row.change_date|custom_format_date:$SESSION.account.timezone_offset:$SESSION.account.date_format}
+              {$row.change_date|custom_format_date:$account.timezone_offset:$account.date_format}
             </td>
             <td>
               {if $row.account_exists}
@@ -212,4 +216,4 @@
     {/if}
   {/if}
 
-{include file='modules_footer.tpl'}
+{ft_include file='modules_footer.tpl'}
