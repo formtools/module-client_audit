@@ -6,7 +6,7 @@ use FormTools\Accounts;
 use FormTools\Clients;
 use FormTools\Core;
 use FormTools\General;
-use PDO, PDOException;
+use PDO, Exception;
 
 
 class Changes
@@ -35,7 +35,7 @@ class Changes
                 "account_id" => $account_id
             ));
             $db->execute();
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             return false;
         }
 
@@ -135,7 +135,7 @@ class Changes
             }
 
             return true;
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             return false;
         }
     }

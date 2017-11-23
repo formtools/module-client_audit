@@ -8,7 +8,7 @@ use FormTools\General;
 use FormTools\Hooks;
 use FormTools\Module as FormToolsModule;
 use FormTools\Sessions;
-use PDOException;
+use Exception;
 
 
 class Module extends FormToolsModule
@@ -18,8 +18,8 @@ class Module extends FormToolsModule
     protected $author = "Ben Keen";
     protected $authorEmail = "ben.keen@gmail.com";
     protected $authorLink = "http://formtools.org";
-    protected $version = "2.0.0";
-    protected $date = "2017-11-13";
+    protected $version = "2.0.1";
+    protected $date = "2017-11-22";
     protected $originLanguage = "en_us";
 
     protected $jsFiles = array(
@@ -105,7 +105,7 @@ class Module extends FormToolsModule
             $db->execute();
             $db->processTransaction();
 
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             $db->rollbackTransaction();
 
             $L = $this->getLangStrings();
@@ -173,7 +173,7 @@ class Module extends FormToolsModule
 
             // bit hacky. The ft_logout_user hook doesn't pass the account ID, so we pull it from sessions
             case "FormTools\\User->logout":
-                if (!Sessions::exists("account")) {
+                if (!Sessions::exists("account") || !Sessions::exists("account.account_id")) {
                     return;
                 }
                 $account = Sessions::get("account");
