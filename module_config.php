@@ -228,7 +228,6 @@ $STRUCTURE["tables"]["module_client_audit_client_permissions"] = array(
     )
 );
 
-
 $HOOKS = array(
     array(
         "hook_type"       => "code",
@@ -290,7 +289,7 @@ $HOOKS = array(
         "hook_type"       => "code",
         "action_location" => "end",
         "function_name"   => "FormTools\\Forms::updateFormMainTab",
-        "hook_function"   => "ca_log_change",
+        "hook_function"   => "logChange",
         "priority"        => "50"
     ),
     array(
